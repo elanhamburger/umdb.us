@@ -1,0 +1,56 @@
+.Predictions-Wrapper {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 400px;
+    padding: 12px;
+}
+
+.Predictions {
+    padding: 8px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.24);
+}
+
+.Predictions-Header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+
+.Predictions-Stop {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.Predictions-StopName {
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.Predictions-StopId {
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0 0 4px 0;
+}
+
+.Predictions-Close {
+    cursor: pointer;
+}
+
+.Predictions-List {
+    display: flex;
+    flex-direction: row;
+}
+
+.Predictions-List > div {
+    width: 50%;
+}
+
+.Predictions-Note {
+    text-align: center;
+    width: 100%;
+}

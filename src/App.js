@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Map from './components/Map';
+import SideBar from './components/SideBar';
+import Predictions from './components/Predictions';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.mapRef = React.createRef();
+        this.state = { };
+        this.onStopSelected = this.onStopSelected.bind(this);
+        this.onPredictionsCloseClicked = this.onPredictionsCloseClicked.bind(this);
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <Map ref={this.mapRef} onStopSelected={this.onStopSelected} />
+                <SideBar onStopSelected={this.onStopSelected} />
+                <Predictions stop={this.state.selected} onCloseClicked={this.onPredictionsCloseClicked} />
+            </div>
+        );
+    }
+
+    onStopSelected(stop) {
+        this.setState({ selected: stop });
+        this.mapRef.current.panTo({ lat: stop.lat, lng: stop.lng });
+    }
+
+    onPredictionsCloseClicked() {
+        this.setState({ selected: null });
+    }
 }
 
 export default App;

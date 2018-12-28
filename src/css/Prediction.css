@@ -1,0 +1,39 @@
+.Prediction {
+    width: 100%;
+    height: 40px;
+    display: grid;
+    background-color: white;
+    grid-template-columns: 40px auto;
+    grid-column-gap: 8px;
+    grid-template-areas:
+        'route-id route-name'
+        'route-id time';
+    align-items: center;
+    margin-top: 4px;
+}
+
+.Prediction-RouteId {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: gray;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    grid-area: route-id;
+}
+
+.Prediction-RouteName {
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.65);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    grid-area: route-name;
+}
+
+.Prediction-Time {
+    font-size: 20px;
+    grid-area: time;
+}

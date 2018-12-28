@@ -1,0 +1,15 @@
+.SearchBar {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.24);
+    border-radius: 4px;
+}
+
+.SearchBar-Input {
+    width: 100%;
+    background: transparent;
+    font-size: 16px;
+    padding: 12px 16px;
+    outline: none;
+    border: none;
+}
