@@ -68,7 +68,7 @@ export default class Predictions extends React.Component {
     }
 
     updatePredictions() {
-        fetch('http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=umd&stopId=' + this.props.stop.id)
+        fetch('https://nextbus.momentumbus.com/service/publicJSONFeed?command=predictions&a=umd&stopId=' + this.props.stop.id)
         .then(response => response.json())
         .then(json => json.predictions.filter(x => x.direction))
         .then(data => data.map(x => ({
