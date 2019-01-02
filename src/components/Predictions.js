@@ -6,6 +6,7 @@ import close from '../img/close.svg';
 
 import '../css/Predictions.css';
 
+const wrap = x => x[0] ? x : [x];
 const unwrap = x => x[0] || x;
 
 export default class Predictions extends React.Component {
@@ -60,6 +61,7 @@ export default class Predictions extends React.Component {
     componentDidUpdate(props) {
         if (this.props.stop !== props.stop) {
             clearInterval(this.interval);
+            this.setState({ data: [] });
             if (this.props.stop) {
                 this.updatePredictions();
                 this.interval = setInterval(this.updatePredictions, 30000);
@@ -70,7 +72,7 @@ export default class Predictions extends React.Component {
     updatePredictions() {
         fetch('https://nextbus.momentumbus.com/service/publicJSONFeed?command=predictions&a=umd&stopId=' + this.props.stop.id)
         .then(response => response.json())
-        .then(json => json.predictions.filter(x => x.direction))
+        .then(json => wrap(json.predictions).filter(x => x.direction))
         .then(data => data.map(x => ({
             id: x.routeTag,
             title: /^\d{3} /.test(x.routeTitle) ? x.routeTitle.substring(4) : x.routeTitle,
