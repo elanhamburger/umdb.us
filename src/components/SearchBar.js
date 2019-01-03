@@ -15,7 +15,8 @@ export default class SearchBar extends React.Component {
     render() {
         return (
             <div className="SearchBar">
-                <input className="SearchBar-Input" type="text" placeholder="Search UMD..." onChange={this.onInputChanged} />
+                <input className="SearchBar-Input" type="text" placeholder="Search UMD..."
+                    onChange={this.onInputChanged} autoComplete="off" />
                 <SearchResults onResultClicked={this.onResultClicked} query={this.state.query} />
             </div>
         );
