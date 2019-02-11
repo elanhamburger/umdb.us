@@ -12,7 +12,7 @@ const unwrap = x => x[0] || x;
 export default class Predictions extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: [] };
+        this.state = { loading: false, data: [] };
         this.updatePredictions = this.updatePredictions.bind(this);
     }
 
@@ -39,7 +39,7 @@ export default class Predictions extends React.Component {
                         ? [
                             <div>
                             {
-                                this.state.data.slice(0,Math.ceil(this.state.data.length / 2))
+                                this.state.data.slice(0, Math.ceil(this.state.data.length / 2))
                                 .map(x => <Prediction key={x.id} id={x.id} name={x.title} min={x.pred} />)
                             }
                             </div>,
@@ -50,7 +50,13 @@ export default class Predictions extends React.Component {
                             }
                             </div>
                           ]
-                        : <p className="Predictions-Note">No buses arriving</p>
+                        : <p className="Predictions-Note">
+                            {
+                                this.state.loading
+                                ? 'Loading...'
+                                : 'No buses arriving'
+                            }
+                          </p>
                     }
                     </div>
                 </div>
@@ -63,6 +69,7 @@ export default class Predictions extends React.Component {
             clearInterval(this.interval);
             this.setState({ data: [] });
             if (this.props.stop) {
+                this.setState({ loading: true });
                 this.updatePredictions();
                 this.interval = setInterval(this.updatePredictions, 30000);
             }
@@ -79,6 +86,6 @@ export default class Predictions extends React.Component {
             pred: unwrap(unwrap(x.direction).prediction).minutes
         })))
         .then(data => data.sort((a,b) => a.id - b.id))
-        .then(data => this.setState({ data: data }));
+        .then(data => this.setState({ loading: false, data: data }));
     }
 }
