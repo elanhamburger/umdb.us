@@ -1,6 +1,7 @@
 import React from 'react';
 
 import bus from '../img/bus.svg';
+import my_location from '../img/my_location.svg';
 
 import '../css/Map.css';
 
@@ -39,12 +40,21 @@ export default class Map extends React.Component {
     }
 
     initMap() {
+        const center = { lat: 38.98754114838913, lng: -76.9440220668912 };
+        const bounds = new window.google.maps.LatLngBounds(
+            { lat: 38.961104, lng: -77.314249 },
+            { lat: 39.202175, lng: -76.779144 }
+        );
+
         const options = {
-            center: { lat: 38.98754114838913, lng: -76.9440220668912 },
+            center: center,
             zoom: 16,
             mapTypeControl: false,
             fullscreenControl: false,
-            streetViewControl: false
+            streetViewControl: false,
+            restriction: {
+                latLngBounds: bounds
+            }
         };
 
         this.map = new window.google.maps.Map(
@@ -63,7 +73,6 @@ export default class Map extends React.Component {
                     icon: bus
                 });
                 marker.addListener('click', () => {
-                    //this.map.panTo(marker.position);
                     this.props.onStopSelected({
                         id: data[i].id,
                         name: data[i].name,
@@ -74,6 +83,46 @@ export default class Map extends React.Component {
                 });
             }
         });
+
+        this.myLocationMarker = new window.google.maps.Marker({
+            map: null,
+            position: center,
+            title: 'My Location',
+            icon: {
+                url: my_location,
+                anchor: new window.google.maps.Point(12, 12)
+            },
+            size: new window.google.maps.Size(24, 24),
+            zIndex: 999
+        });
+        this.myLocationRadius = new window.google.maps.Circle({
+            map: null,
+            strokeWeight: 0,
+            fillColor: '#CCDAF0',
+            fillOpacity: 0.35,
+            center: center,
+            radius: 1,
+        });
+
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(position => {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                if (bounds.contains(pos)) {
+                    this.myLocationMarker.setMap(this.map);
+                    this.myLocationMarker.setPosition(pos);
+                    this.myLocationRadius.setMap(this.map);
+                    this.myLocationRadius.setCenter(pos);
+                    this.myLocationRadius.setRadius(position.coords.accuracy);
+                } else {
+                    this.myLocationMarker.setMap(null);
+                    this.myLocationRadius.setMap(null);
+                }
+            });
+        }
     }
 
     panTo(coords) {
