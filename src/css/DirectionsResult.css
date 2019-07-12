@@ -1,0 +1,74 @@
+.DirectionsResult {
+    width: 100%;
+    height: 56px;
+    display: grid;
+    background-color: white;
+    grid-template-columns: 40px auto;
+    grid-column-gap: 8px;
+    grid-template-areas:
+        'symbol title'
+        'symbol info';
+    align-items: center;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.DirectionsResult-Symbol {
+    height: 12px;
+    width: 12px;
+    line-height: 40px;
+    grid-area: symbol;
+    border: 2px solid black;
+    border-radius: 50%;
+    margin: auto;
+    background-color: white;
+    z-index: 1;
+}
+
+.DirectionsResult-Line-Top {
+    width: 8px;
+    height: 20px;
+    background-color: black;
+    grid-area: symbol;
+    margin: 0 auto;
+    align-self: start;
+}
+
+.DirectionsResult-Line-Bottom {
+    width: 8px;
+    height: 20px;
+    background-color: black;
+    grid-area: symbol;
+    margin: 0 auto;
+    align-self: end;
+}
+
+.DirectionsResult-Line-Full {
+    width: 8px;
+    height: 72px;
+    background-color: black;
+    grid-area: symbol;
+    margin: -16px auto;
+}
+
+.DirectionsResult-Title {
+    font-size: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    grid-area: title;
+}
+
+.DirectionsResult-Info {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+    grid-area: info;
+}
+
+.DirectionsResult-Route {
+    display: inline-block;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 6px;
+    margin-right: 4px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import marker from '../img/marker.svg';
+import { ReactComponent as Marker } from '../img/marker.svg';
 
 import '../css/SearchResults.css';
 
@@ -13,7 +13,7 @@ class SearchResult extends React.Component {
     render() {
         return (
             <div className="SearchResult" onClick={this.onClick}>
-                <img className="SearchResult-Image" src={marker} alt="Bus Stop" />
+                <Marker className="SearchResult-Image" alt="Bus Stop" />
                 <span className="SearchResult-Name">{this.props.result.name}</span>
                 <span className="SearchResult-Id">Stop #{this.props.result.id}</span>
             </div>
@@ -44,7 +44,7 @@ export default class SearchResults extends React.Component {
     }
 
     componentDidUpdate(props) {
-        if (this.props.query !== props.query) {
+        if (this.props !== props) {
             if (this.props.query) {
                 fetch('https://api.momentumbus.com/search?q=' + this.props.query)
                 .then(response => response.json())

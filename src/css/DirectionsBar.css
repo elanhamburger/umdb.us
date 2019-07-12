@@ -2,7 +2,7 @@
     width: 100%;
     background-color: #00194B;
     box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.24);
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .DirectionsBar-Input {
@@ -17,4 +17,27 @@
 
 .DirectionsBar-Input::placeholder {
     color: rgba(255, 255, 255, 0.65);
+}
+
+.DirectionsBar-RouteSet {
+    width: 100%;
+    padding: 7px 16px;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    line-height: 24px;
+    user-select: none;
+}
+
+.DirectionsBar-RouteSet > svg {
+    float: right;
 }
