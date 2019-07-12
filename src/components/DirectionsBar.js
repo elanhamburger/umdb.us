@@ -3,6 +3,7 @@ import React from 'react';
 import SearchResults from './SearchResults';
 import DirectionsResults from './DirectionsResults';
 
+import { ReactComponent as Close } from '../img/close_white.svg';
 import { ReactComponent as Swap } from '../img/swap.svg';
 
 import '../css/DirectionsBar.css';
@@ -24,8 +25,15 @@ export default class DirectionsBar extends React.Component {
     render() {
         return (
             <div className="DirectionsBar">
-                <input className="DirectionsBar-Input" name="from" type="text" placeholder="From" onChange={this.onInputChanged} autoComplete="off" />
-                <input className="DirectionsBar-Input" name="to" type="text" placeholder="To" onChange={this.onInputChanged} autoComplete="off" />
+                <div className="DirectionsBar-Header">
+                    <div>
+                        <input className="DirectionsBar-Header-Input" name="from" type="text" placeholder="From" onChange={this.onInputChanged} autoComplete="off" />
+                        <input className="DirectionsBar-Header-Input" name="to" type="text" placeholder="To" onChange={this.onInputChanged} autoComplete="off" />
+                    </div>
+                    <div className="DirectionsBar-Header-Close">
+                        <Close className="DirectionsBar-Header-Close-Button" onClick={this.props.onSwitchMode} />
+                    </div>
+                </div>
                 <div className="DirectionsBar-RouteSet" onClick={this.onRouteSetChanged}>
                     {this.state.daytime ? 'Daytime Routes' : 'Weekend/Evening Routes'}
                     <Swap />

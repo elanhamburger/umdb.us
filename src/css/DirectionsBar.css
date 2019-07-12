@@ -5,7 +5,13 @@
     border-radius: 4px;
 }
 
-.DirectionsBar-Input {
+.DirectionsBar-Header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.DirectionsBar-Header-Input {
     width: 100%;
     background: transparent;
     color: white;
@@ -15,8 +21,18 @@
     border: none;
 }
 
-.DirectionsBar-Input::placeholder {
+.DirectionsBar-Header-Input::placeholder {
     color: rgba(255, 255, 255, 0.65);
+}
+
+.DirectionsBar-Header-Close {
+    padding: 8px;
+}
+
+.DirectionsBar-Header-Close-Button {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
 }
 
 .DirectionsBar-RouteSet {
