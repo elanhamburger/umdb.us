@@ -50,7 +50,7 @@ export default class DirectionsResults extends React.Component {
             {
                 this.state.data.length > 0
                 ? this.state.data.map((x, i) => (<DirectionsResult key={i} result={x} first={i === 0} last={i === this.state.data.length - 1} />))
-                : <div>There are no routes that run between these two stops</div>
+                : <div className="DirectionsResults-None">There are no routes that run between these two stops</div>
             }
             </div>
         );
