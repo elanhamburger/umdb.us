@@ -2,6 +2,8 @@ import React from 'react';
 
 import { color } from '../util/util';
 
+import walk from '../img/walk.svg';
+
 import '../css/DirectionsResults.css';
 import '../css/DirectionsResult.css';
 
@@ -26,11 +28,23 @@ const DirectionsResultRoute = props => (
     </div>
 );
 
+const DirectionsResultWalk = props => (
+    <div className="DirectionsResult">
+        <div className="DirectionsResult-Line-Full" />
+        <div className="DirectionsResult-Title">
+            <img className="DirectionsResult-Walk" src={walk} alt="Walk" /> Walk
+        </div>
+        <div className="DirectionsResult-Info">Cross the street</div>
+    </div>
+);
+
 const DirectionsResult = props => {
     if (props.result.type === 'stop') {
         return <DirectionsResultStop stop={props.result} {...props} />;
     } else if (props.result.type === 'route') {
         return <DirectionsResultRoute route={props.result} />;
+    } else if (props.result.type === 'walk') {
+        return <DirectionsResultWalk />
     }
 };
 
