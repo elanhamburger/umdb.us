@@ -16,7 +16,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Map ref={this.mapRef} onStopSelected={this.onStopSelected} />
+                <Map ref={this.mapRef} onStopSelected={this.onStopSelected} selection={this.state.selected} />
                 <SideBar onStopSelected={this.onStopSelected} />
                 <Predictions stop={this.state.selected} onCloseClicked={this.onPredictionsCloseClicked} />
             </div>

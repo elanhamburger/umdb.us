@@ -39,6 +39,13 @@ export default class Map extends React.Component {
         }
     }
 
+    componentDidUpdate(props) {
+        if (this.props.selection !== props.selection) {
+            props.selection && this.markers[props.selection.id].setIcon(bus);
+            this.props.selection && this.markers[this.props.selection.id].setIcon();
+        }
+    }
+
     initMap() {
         const center = { lat: 38.98754114838913, lng: -76.9440220668912 };
         const bounds = new window.google.maps.LatLngBounds(
@@ -62,6 +69,8 @@ export default class Map extends React.Component {
             options
         );
 
+        this.markers = { };
+
         fetch('https://api.momentumbus.com/stops.json')
         .then(response => response.json())
         .then(data => {
@@ -72,6 +81,7 @@ export default class Map extends React.Component {
                     title: data[i].name,
                     icon: bus
                 });
+                this.markers[data[i].id] = marker;
                 marker.addListener('click', () => {
                     this.props.onStopSelected({
                         id: data[i].id,
