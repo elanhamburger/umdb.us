@@ -12,7 +12,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "echo 'momentumbus.com' > ./build/CNAME && gh-pages -d build"
+    "deploy": "echo 'umdb.us' > ./build/CNAME && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
