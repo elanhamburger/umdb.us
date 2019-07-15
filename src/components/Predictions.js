@@ -80,12 +80,14 @@ export default class Predictions extends React.Component {
         fetch('https://nextbus.momentumbus.com/service/publicJSONFeed?command=predictions&a=umd&stopId=' + this.props.stop.id)
         .then(response => response.json())
         .then(json => wrap(json.predictions).filter(x => x.direction))
+        .then(data => data.Error ? Promise.reject() : Promise.resolve(data))
         .then(data => data.map(x => ({
             id: x.routeTag,
             title: /^\d{3} /.test(x.routeTitle) ? x.routeTitle.substring(4) : x.routeTitle,
             pred: unwrap(unwrap(x.direction).prediction).minutes
         })))
         .then(data => data.sort((a,b) => a.id - b.id))
-        .then(data => this.setState({ loading: false, data: data }));
+        .then(data => this.setState({ loading: false, data: data }))
+        .catch(() => this.setState({ loading:false, data: [] }));
     }
 }
