@@ -19,6 +19,7 @@
     padding: 12px 16px;
     outline: none;
     border: none;
+    margin: 0;
 }
 
 .DirectionsBar-Header-Input::placeholder {

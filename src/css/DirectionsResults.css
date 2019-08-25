@@ -1,6 +1,8 @@
 .DirectionsResults {
     background-color: white;
     border-radius: 4px;
+    overflow-y: scroll;
+    max-height: calc(100vh - 148px);
 }
 
 .DirectionsResults-None {
