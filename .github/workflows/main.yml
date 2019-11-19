@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      - name: Setup node.js
+      - name: Set up node.js
         uses: actions/setup-node@v1
       - name: Install dependencies
         run: npm install
@@ -21,9 +21,8 @@ jobs:
         run: npm run build
       - name: Deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY_PATH: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
         run: |
-          REPOSITORY_PATH="https://${"x-access-token:$GITHUB_TOKEN"}@github.com/${GITHUB_REPOSITORY}.git"
           git config --global user.email "elan.hamburger@gmail.com"
           git config --global user.name "Elan Hamburger"
           git add -f build
