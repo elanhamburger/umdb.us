@@ -27,4 +27,4 @@ jobs:
           git config --global user.name "Elan Hamburger"
           git add -f build
           git commit -m "Deploy of commit ${GITHUB_SHA:0:7}"
-          git push $REPOSITORY_PATH `git subtree split --prefix build master`:gh-pages --force
+          git push $REPOSITORY_PATH `git subtree split --prefix build`:gh-pages --force
