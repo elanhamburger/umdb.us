@@ -22,5 +22,5 @@ jobs:
           git config --global user.email "elan.hamburger@gmail.com"
           git config --global user.name "Elan Hamburger"
           git add -f build
-          git commit -m "Deploy of commit $GITHUB_SHA"
-          git push $GITHUB_REPOSITORY `git subtree split --prefix build master`:gh-pages --force
+          git commit -m "Deploy of commit ${GITHUB_SHA:0:7}"
+          git push https://github.com/$GITHUB_REPOSITORY `git subtree split --prefix build master`:gh-pages --force
