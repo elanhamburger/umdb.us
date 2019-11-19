@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Set up node.js
+        uses: actions/setup-node@v1
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        env:
+          REPOSITORY_PATH: "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+        run: |
+          git config --global user.email "elan.hamburger@gmail.com"
+          git config --global user.name "Elan Hamburger"
+          git add -f build
+          git commit -m "Deploy of commit ${GITHUB_SHA:0:7}"
+          git push $REPOSITORY_PATH `git subtree split --prefix build`:gh-pages --force
