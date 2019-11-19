@@ -19,6 +19,8 @@ jobs:
         run: npm run build
       - name: Deploy
         run: |
+          git config --global user.email "elan.hamburger@gmail.com"
+          git config --global user.name "Elan Hamburger"
           git add -f build
           git commit -m "Deploy of commit $GITHUB_SHA"
           git push $GITHUB_REPOSITORY `git subtree split --prefix build master`:gh-pages --force
