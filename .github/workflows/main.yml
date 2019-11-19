@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        run: |
+          git add -f build
+          git commit -m "Deploy of commit $GITHUB_SHA"
+          git push $GITHUB_REPOSITORY `git subtree split --prefix build master`:gh-pages --force
